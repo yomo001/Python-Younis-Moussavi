@@ -4,3 +4,12 @@
 - Course
 - Python
 - AI
+
+---
+
+``` python
+print ("Hej")
+print("Hej")
+
+```
+
