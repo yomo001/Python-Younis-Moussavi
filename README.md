@@ -1,14 +1,6 @@
 # Python-Younis-Moussavi
 **Python course for AI23, ITHS**
 
-- Course
-- Python
-- AI
+Det här repot använder jag för pythonkursen AI23
 
----
 
-``` python
-print ("Hej")
-print("Hej")
-
-```
