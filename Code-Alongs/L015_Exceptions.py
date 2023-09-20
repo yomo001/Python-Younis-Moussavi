@@ -19,7 +19,7 @@ def input_int(prompt = "Input: "):
 
         #else:            #try o except hänger alltid ihop, men går lägga till else t.ex.i python, som körs om inget går fel
             #break      Behövs ej med en return
-            #return my_int     #avbryter hela funktionen och ger tillbaka värdet, därför hade inte break behövts
+            #return my_int     #avbryter    hela funktionen och ger tillbaka värdet, därför hade inte break behövts
 
 
 age = input_int("Input age: ")
