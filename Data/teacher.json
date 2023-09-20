@@ -1,0 +1,18 @@
+{
+    "firstname": "Fredrik",
+    "lastname": "Johansson",
+    "age": 42,
+    "languages": [
+        "Python",
+        "C#",
+        "Javascript"
+    ],
+    "contact info": {
+        "phone": "0701981713",
+        "email": "younis@dvv.se",
+        "adress": [
+            "sweden",
+            "lebanon"
+        ]
+    }
+}
