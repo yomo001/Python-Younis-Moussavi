@@ -32,7 +32,7 @@ def print_hello(n):
     for i in range(n):
         print("hello")
 
-def print_hello_recursive(n):     #Som ovan men genom recursive, tar mer minne i call stacken och mer svårläst.
+def print_hello_recursive(n):     #Som ovan men genom recursive, tar mer minne i call stacken och mer svårläst. Kan ge call stack problem. 
     print("hello")
     if n > 1: print_hello_recursive(n-1)
     return
