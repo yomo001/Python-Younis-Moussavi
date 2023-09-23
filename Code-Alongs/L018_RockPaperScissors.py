@@ -25,7 +25,6 @@ def print_rules():
         print(f"{SIGNS[winner]} wins over {SIGNS[loser]}")
     
 
-
 def select_number_of_rounds():
     while True:
         try:
