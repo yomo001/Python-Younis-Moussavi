@@ -9,18 +9,33 @@ from random import choice
 
 SIGNS = ["rock", "paper", "scissors"]     # in python, capitalization is done to mark that this global variable is CONSTANT and NOT to be changed anywhere.
 
+
 def main():
     print(f"Welcome to the {', '.join(SIGNS)} game.")
     print_rules()
-    game_loop(3)
+    number_of_rounds = select_number_of_rounds()
+    print(f"\nBest of {number_of_rounds} wins. Let's start!\n")
+
+    game_loop(number_of_rounds)
 
 
 def print_rules():
     print("\nRules: Each player picks a sign:")
     for winner, loser in zip([0, 1, 2], [2, 0, 1]):
         print(f"{SIGNS[winner]} wins over {SIGNS[loser]}")
+    
 
-def game_loop(number_of_rounds = 1):
+
+def select_number_of_rounds():
+    while True:
+        try:
+            rounds =  int(input("Select number of rounds: "))
+            if 1 <= rounds <= 10: return rounds
+            else: print("Rounds must be from 1 to 10.")
+        except ValueError:
+            print("Enter an integer")   
+
+def game_loop(number_of_rounds):
     for current_round in range(1, number_of_rounds + 1):
         print(f"\nRound {current_round}: ")
         sign_player_a = get_sign_from_user()
@@ -37,7 +52,7 @@ def game_loop(number_of_rounds = 1):
 
 def get_sign_from_user():
     while True:
-        sign = input("Pick a sign: ")
+        sign = input("Pick a sign: ").strip().lower()              #Strip to remove spaces,  .lower() to accept all capitalization
         if sign in SIGNS:
             return sign
         else: 
