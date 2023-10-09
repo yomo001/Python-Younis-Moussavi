@@ -1,3 +1,6 @@
+# import math    # skrivs bara över sedan av samma bibliotek som importeras via L027_Module. Man måste dock
+# importera den separat såhär om man vill använda dess funktioner i denna fil. Blir ej dubbelt i minnet. 
+
 import L027_Module
 # import L027_Module as m           # Här kan vi kalla modulen för m i filen när vi vill använda den
 # from L027_Module import square    # Här importerar vi enbart funktionen square från metoden. Om det t.ex. är jätte

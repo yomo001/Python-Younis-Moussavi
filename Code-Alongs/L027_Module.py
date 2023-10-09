@@ -8,9 +8,14 @@
 # Bibliotek: Ngt man laddar in och kan återanvända. 
     # I python pratar man specifkt om Module och package som bibliotek: modul är en py - fil, package är många fler filer.
 
+import math                           # Man kan importera moduler i modulfiler. Då kommer filen man importerar den till
+                                      # att läsa av den, exekvera den och sedan exekvera övrigt i modulen
+                                      # Om math även importeras separat tillsammans med denna modul, DÅ kan man använda dess 
+                                      # funktioner även i den andra filen dit modulen importeras. Det blir inte dubbelt i minnet
+                                      # Python skriver bara över det (se L028_Unit_test)
 
-def main():
-    for i in range(5):
+def main():                           
+    for i in range(5):                  
         print(f"{i} = {square(i)}")
 
 
@@ -21,9 +26,6 @@ def square(n):                        # Denna läggs till minnet när modulen(fi
 
 #for i in range(5):                    # Dessa exkvekreras direkt i filer där man importerar denna modul. Vill undvika sånt
 #    print(i)                          # Man gör inte så normalt sätt i moduler, vill ej ha koder som exkverdreras 
-
-
-
 
 
 
