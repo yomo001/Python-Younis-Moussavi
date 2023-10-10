@@ -26,9 +26,6 @@ from L027_Module_test import square, greet
 # print("end")  # Denna del var bara för att påvisa de koder mellan start och end
 
 
-# def main():
-#     test_square()
-    
 
 # Här är testet för att en funktion funkar som den ska, om nedan går igenom. 
 # Tänk dig att du t.ex. gör sådana testfunktioner och sedan kör dom, för att 
@@ -54,8 +51,6 @@ def test_greet_default():
 def test_greet_argument():
      assert greet("Fredrik") == "Hello, Fredrik"
 
-# if __name__ =="__main__":
-#         main()
 
 # Mer OM HUR PYTEST FUNKAR:
 # Den kollar på vilket värde MAN FÅR UT, vid en viss INPUT,
@@ -69,5 +64,4 @@ def test_greet_argument():
         # Bara för att testerna går igenom betyder inte att koden funkar som den ska 
 # Vid refaktoring, är såna tester särskilt bra. Då kan man upptäcka om en funktionalitet försvann i samband med det.
 # Varje "enhet"/funktion testas för sig - FÅR INTE HA SIDE-effects om det ska gå att testa
-
 
