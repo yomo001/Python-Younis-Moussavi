@@ -42,10 +42,9 @@ def square(n):                        # Denna läggs till minnet när modulen(fi
 
 if __name__ == "__main__":             # Nu printar jag inte __name__ från koden ovan. 
    main()                              # Istället väljer att köra funktionen OM __name__ för denna fil jag står 
-                                       # i == __main__, vilket innebär att det ska vara modulfilen.
+                                       # i == __main__, vilket innebär att det ska vara självaste modulfilen.
                                        # När man då kör en fil som importerar modulen, laddar den in de funktioner som finns
                                        # men kör inte main
-
 # ALLTSÅ
 # När man importerar en fil, kör den den kod som finns i filen. 
         # Sätt att undvika detta är att sätta if satsen:

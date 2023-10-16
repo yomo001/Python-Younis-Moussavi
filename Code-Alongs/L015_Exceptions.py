@@ -7,7 +7,8 @@
 def input_int(prompt = "Input: "):
     while True:
         try:   # try används när man vet att ngt kan gå fel, man ber den testa ngt under visst villkor
-            #my_int = int(input(prompt))   #man kan förutspå vad som hade kunnat ge runtime error, t.ex. att ngn anger en sträng här och hantera detta i koden
+            #my_int = int(input(prompt))   #man kan förutspå vad som hade kunnat ge runtime error, t.ex. att ngn anger en 
+            # sträng här och hantera detta i koden
             #print(x)                #bästa är dock att ha varje sak i egen try-except, eftersom det är olika saker.
             return int(input(prompt))          #istället för under else går att ha här, även istället för my_int =
         except ValueError:       #man specificerar att det är vid denna typ av fel vi vill köra try/except, och lägger den kod man faktiskt tror kan få fel i kodblocket
