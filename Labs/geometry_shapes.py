@@ -25,7 +25,7 @@ class GeometricShapes:
     def y_coordinate(self, new_y):
         self._y = new_y
 
-    def translate(self, new_x, new_y):
+    def translate(self, new_x, new_y):         # Method for translating the shape
             try:
                 self.x_coordinate = float(new_x)
                 self.y_coordinate = float(new_y)
@@ -109,7 +109,7 @@ class Circle(GeometricShapes):
 
 
     
-# Rectangle class
+# Rectangle class - subclass of GeometricShapes
 class Rectangle(GeometricShapes):
     def __init__(self, x, y, width, height):
         super().__init__(x, y)
@@ -143,13 +143,13 @@ class Rectangle(GeometricShapes):
         distance_x = test_x-self._x
         distance_y = test_y-self._y
         if distance_x <= self._width/2 and distance_y <= self._height/2:      # Distance from x/y min, max for assessment
-            self.plot(test_x, test_y)                      # Plot to visualize the point in relation to the circle
+            self.plot(test_x, test_y)                      # Plot to visualize the point in relation to the rectangle
             return True
         else: 
-            self.plot(test_x, test_y)
+            self.plot(test_x, test_y)                      # Plot to visualize the point in relation to the rectangle
             return False
         
-    def plot(self, test_x = None, test_y = None): 
+    def plot(self, test_x = None, test_y = None):          # Method for plotting the rectangle
         fig, ax = plt.subplots()
         ax.set_xticks(range(-5, 6)) 
         ax.set_yticks(range(-5, 6)) 
@@ -170,49 +170,49 @@ class Rectangle(GeometricShapes):
 
 
 
-# Cube class
+# Cube class - subclass of GeometricShapes
 
 class Cube(GeometricShapes):
     def __init__(self, x, y, z, side):
         super().__init__(x, y)
         try:   
-            self._z = z
-            self._side = float(side)
+            self._z = z                     # Specifik for rectangle, added to __init__ inheritance from superclass
+            self._side = float(side)        # Specifik for rectangle, added to __init__ inheritance from superclass
         except ValueError as e:
             print(f"{e}")
 
-    @property
+    @property                               # Area property
     def area(self):
         return 6*self._side**2
     
-    @property
+    @property                               # Circumference property
     def circumference(self):
         return 12*(self._side)
 
-    def __repr__(self):
+    def __repr__(self):                     # __repr__ overload
         return f"This is a cube with the coordinates {self._x},{self._y},{self._z} and area {self.area} squared units"
 
-    def __str__(self):
+    def __str__(self):                      # __str__ overload
         return f"This is a cube with the coordinates {self._x},{self._y},{self._z} and area {self.area} squared units"
               
-    def is_cube(self):
+    def is_cube(self):                      # Method for assessing if the shape is a cube
         if self.circumference/self._side == 12:
             print("This is a cube")
         else:
             print("This is not a cube")
 
-    def is_inside(self, test_x, test_y, test_z):
-        distance_x = test_x-self._x
+    def is_inside(self, test_x, test_y, test_z):        # Method for assessing if a point is within the cube
+        distance_x = test_x-self._x                     # Assesing distance from x,y,z min, max 
         distance_y = test_y-self._y
         distance_z = test_z-self._z
         if distance_x <= self._side/2 and distance_y <= self._side/2 and distance_z <= self._side/2:
-            self.plot(test_x, test_y)
+            self.plot(test_x, test_y)                   # Plotting the point to visualize relation to cube (obs 2D, depth not visualized)
             return True
         else: 
             self.plot(test_x, test_y)
             return False
         
-    def translate(self, new_x, new_y, new_z):
+    def translate(self, new_x, new_y, new_z):           #
         super().translate(new_x, new_y)
         try:
             self.z_coordinate = float(new_z)
