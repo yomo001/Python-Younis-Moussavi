@@ -91,6 +91,7 @@ class Circle(GeometricShapes):
             return False
         
     def plot(self, test_x = None, test_y = None):    # Method for plotting the circle
+        # The figure and graphics
         fig, ax = plt.subplots()
         ax.set_xticks(range(-5, 6)) 
         ax.set_yticks(range(-5, 6)) 
@@ -102,7 +103,7 @@ class Circle(GeometricShapes):
         if test_x is not None and test_y is not None:
             plt.plot(test_x, test_y, 'ro')
 
-        #Själva plotten
+        # The plot
         circle_for_plot = pltCircle((self._x, self._y), self._radius, fill=False, color='blue')
         ax.add_patch(circle_for_plot)
         plt.show()
@@ -150,6 +151,7 @@ class Rectangle(GeometricShapes):
             return False
         
     def plot(self, test_x = None, test_y = None):          # Method for plotting the rectangle
+        # The figure and graphics
         fig, ax = plt.subplots()
         ax.set_xticks(range(-5, 6)) 
         ax.set_yticks(range(-5, 6)) 
@@ -161,7 +163,7 @@ class Rectangle(GeometricShapes):
         if test_x is not None and test_y is not None:
             plt.plot(test_x, test_y, 'ro')
 
-        # Själva plotten
+        # The plot
         x_min = self._x - self._side/2
         y_min = self._y - self._side/2
         rectangle = pltRectangle((x_min, y_min), self._side, self._side, fill = False)
@@ -176,8 +178,8 @@ class Cube(GeometricShapes):
     def __init__(self, x, y, z, side):
         super().__init__(x, y)
         try:   
-            self._z = z                     # Specifik for rectangle, added to __init__ inheritance from superclass
-            self._side = float(side)        # Specifik for rectangle, added to __init__ inheritance from superclass
+            self._z = z                     # Specifik for cube, added to __init__ inheritance from superclass
+            self._side = float(side)        # Specifik for cube, added to __init__ inheritance from superclass
         except ValueError as e:
             print(f"{e}")
 
@@ -188,6 +190,14 @@ class Cube(GeometricShapes):
     @property                               # Circumference property
     def circumference(self):
         return 12*(self._side)
+
+    @property                               # Property for z coordinate
+    def z_coordinate(self):
+        return self._z
+
+    @z_coordinate.setter
+    def z_coordinate(self, new_z):
+        self._z = new_z
 
     def __repr__(self):                     # __repr__ overload
         return f"This is a cube with the coordinates {self._x},{self._y},{self._z} and area {self.area} squared units"
@@ -212,15 +222,16 @@ class Cube(GeometricShapes):
             self.plot(test_x, test_y)
             return False
         
-    def translate(self, new_x, new_y, new_z):           #
+    def translate(self, new_x, new_y, new_z):           # Polymorphism of translate method
         super().translate(new_x, new_y)
         try:
             self.z_coordinate = float(new_z)
         except ValueError:
             print(f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', both have to be numerics.")
     
-    # Samma som för rektangel, plottar i 2D, blir samma bild, missar dock djupet men ser iaf. på 2D planet 
-    def plot(self, test_x = None, test_y = None):
+
+    def plot(self, test_x = None, test_y = None):       # Method for plotting the "cube"(rectangle), in 2D, depth not visualized
+        # The figure and graphics
         fig, ax = plt.subplots()
         ax.set_xticks(range(-5, 6)) 
         ax.set_yticks(range(-5, 6)) 
@@ -232,7 +243,7 @@ class Cube(GeometricShapes):
         if test_x is not None and test_y is not None:
             plt.plot(test_x, test_y, 'ro')
 
-        # Själva plotten
+        # The plot 
         x_min = self._x - self._side/2
         y_min = self._y - self._side/2
         rectangle = pltRectangle((x_min, y_min), self._side, self._side, fill = False)
@@ -245,23 +256,23 @@ class Sphere(GeometricShapes):
     def __init__(self, x, y, z, radius):
         super().__init__(x, y)
         try:   
-            self._z = float(z)
-            self._radius = float(radius)
+            self._z = float(z)                      # Specifik for sphere, added to __init__ inheritance from superclass
+            self._radius = float(radius)            # Specifik for sphere, added to __init__ inheritance from superclass
         except ValueError as e:
             print(f"{e}")
 
-    @property
+    @property                                       # Area property
     def area(self):
         return math.pi*4*self.radius**2
 
-    @property
+    @property                                       # Circumference property
     def circumference(self):
         return 2 * math.pi * self.radius
 
     def circumference(self):
         return 2 * math.pi * self.radius
     
-    @property
+    @property                                       # Property for z coordinate
     def z_coordinate(self):
         return self._z
 
@@ -269,35 +280,35 @@ class Sphere(GeometricShapes):
     def z_coordinate(self, new_z):
         self._z = new_z
 
-    def __repr__(self):
+    def __repr__(self):                             # __repr__ overload
         return f"This is a sphere with the coordinates {self._x}, {self._y},{self._z} and radius {self._radius} units"
 
-    def __str__(self):
+    def __str__(self):                              # __str__ overload
         return f"This is a sphere with the coordinates {self._x}, {self._y},{self._z} and radius {self._radius} units"
 
-    def is_unit_sphere(self):
+    def is_unit_sphere(self):                       # Method for checking if sphere is a unit sphere
         if self._x == 0 and self._y == 0 and self._z == 0 and self._radius == 1:
             print("This is a unit sphere")
         else:
             print("This is not a unit sphere")
 
-    def is_inside(self, test_x, test_y, test_z):
+    def is_inside(self, test_x, test_y, test_z):    # Method for checking if point is within sphere
         distance = math.sqrt((test_x-self._x)**2+(test_y-self._y)**2+(test_z-self._z)**2)   # https://stackoverflow.com/questions/26818772/python-checking-if-a-point-is-in-sphere-with-center-x-y-z
         if distance <= self._radius:
-            self.plot(test_x, test_y)
+            self.plot(test_x, test_y)               # Plot to visualize point in relation to square (obs, 2D, depth not visualized)
             return True
         else: 
-            self.plot(test_x, test_y)
+            self.plot(test_x, test_y)               # Plot to visualize point in relation to square (obs, 2D, depth not visualized)
             return False
         
-    def translate(self, new_x, new_y, new_z):
+    def translate(self, new_x, new_y, new_z):       # Polymorphism of translate method
         super().translate(new_x, new_y)
         try:
             self.z_coordinate = float(new_z)
         except ValueError:
             print(f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', both have to be numerics.")
 
-        # Samma som för cirkel, plottar i 2D, blir samma bild, missar dock djupet men ser iaf. på 2D planet
+    # Method for plotting "sphere" (actually circle since in 2D, depth not visualized)
     def plot(self, test_x = None, test_y = None):
         fig, ax = plt.subplots()
         ax.set_xticks(range(-5, 6)) 
@@ -318,7 +329,7 @@ class Sphere(GeometricShapes):
 
 def main():
     
-    # Kontroll enligt labben
+    # Controls from labb3 assignment instructions. All passed.
     cirkel1 = Circle(x=0,y=0, radius=1) # enhetscirkel
     cirkel2 = Circle(x=1,y=1, radius=1)
     rektangel = Rectangle(x=0,y=0,width=1, height=1)
@@ -329,7 +340,7 @@ def main():
     print(cirkel1.is_inside(0.5, 0.5)) # False
     cirkel1.translate("TRE",5) # ge ValueError med lämplig kommentar
 
-if __name__ == "__main__":
+if __name__ == "__main__":               # To avoid "loose code" from running when importing module
     main()
 
 
