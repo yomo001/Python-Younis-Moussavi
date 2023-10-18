@@ -2,7 +2,16 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle as pltCircle, Rectangle as pltRectangle
 import math
 
-# GeometricShapes class - superclass
+# In this module you will find
+# 1. Class GeometricShapes
+# 2. Class Circle (Inheriting from GeometricShapes)
+# 3. Class Rectangle (Inheriting from GeometricShapes)
+# 4. Class Cube (Inheriting from Rectangle)
+# 5. Class Sphere (Inheriting from Circle)
+# 6. Main function for assessment statements from labb3 instructions
+
+
+# 1. Class GeometricShapes
 
 class GeometricShapes:          
     def __init__(self, x, y):
@@ -10,19 +19,19 @@ class GeometricShapes:
         self._y = y
 
     @property
-    def x_coordinate(self):
+    def x(self):
         return self._x
 
-    @x_coordinate.setter
-    def x_coordinate(self, new_x):
+    @x.setter
+    def x(self, new_x):
         self._x = new_x
 
     @property
-    def y_coordinate(self):
+    def y(self):
         return self._y
 
-    @y_coordinate.setter
-    def y_coordinate(self, new_y):
+    @y.setter
+    def y(self, new_y):
         self._y = new_y
     
     @property                                   # Area property
@@ -31,10 +40,12 @@ class GeometricShapes:
 
     def translate(self, new_x, new_y):         # Method for translating the shape
             try:
-                self.x_coordinate = float(new_x)
-                self.y_coordinate = float(new_y)
+                self.x = float(new_x)
+                self.y = float(new_y)
             except ValueError:
-                return f"Error, you entered '{new_x}' and '{new_y}', both have to be numerics."
+                error_alert = f"Error, you entered '{new_x}' and '{new_y}', both have to be numerics."
+                print(error_alert)            # Because assessment question in labb3 required printing it out when entering it.
+                return error_alert
             
     def __eq__(self, other):                   # Operator overload of ==
         return type(self) is type(other)
@@ -52,7 +63,9 @@ class GeometricShapes:
         return self.area >= other.area
 
 
-# Circle class - subclass of GeometricShapes
+
+
+# 2. Class Circle (Inheriting from GeometricShapes)
 
 class Circle(GeometricShapes):
     def __init__(self, x, y, radius):
@@ -106,8 +119,10 @@ class Circle(GeometricShapes):
         plt.show()
 
 
+
     
-# Rectangle class - subclass of GeometricShapes
+# 3. Class Rectangle (Inheriting from GeometricShapes)
+
 class Rectangle(GeometricShapes):
     def __init__(self, x, y, width, height):
         super().__init__(x, y)
@@ -162,7 +177,8 @@ class Rectangle(GeometricShapes):
 
 
 
-# Cube class - subclass of Rectangle
+
+# 4. Class Cube (Inheriting from Rectangle)
 
 class Cube(Rectangle):
     def __init__(self, x, y, z, width, height, depth):
@@ -182,11 +198,11 @@ class Cube(Rectangle):
         return 4* self._width               # If it is a cube, then width, height and depth are the same, so 4 x optional side
 
     @property                               # Property for z coordinate
-    def z_coordinate(self):
+    def z(self):
         return self._z
 
-    @z_coordinate.setter
-    def z_coordinate(self, new_z):
+    @z.setter
+    def z(self, new_z):
         self._z = new_z
 
     def __repr__(self):                     # __repr__ overload
@@ -206,14 +222,20 @@ class Cube(Rectangle):
         return distance_x <= self._width/2 and distance_y <= self._height/2 and distance_z <= self._depth/2
 
     def translate(self, new_x, new_y, new_z):           # Translate method. Polymorphism.
-        super().translate(new_x, new_y)
         try:
-            self.z_coordinate = float(new_z)
+            self.x = float(new_x)
+            self.y = float(new_y)
+            self.z = float(new_z)
         except ValueError:
-            return f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', both have to be numerics."
-        
+            error_alert = f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', all have to be numerics."
+            print(error_alert)
+            return(error_alert)
 
-# Sphere class - sublass of Circle
+
+
+
+# 5. Class Sphere (Inheriting from Circle)
+
 class Sphere(Circle):
     def __init__(self, x, y, z, radius):
         super().__init__(x, y, radius)
@@ -253,30 +275,21 @@ class Sphere(Circle):
         return distance <= self._radius              
         
     def translate(self, new_x, new_y, new_z):       # Polymorphism of translate method
-        super().translate(new_x, new_y)
         try:
+            self.x = float(new_x)
+            self.y = float(new_y)
             self.z_coordinate = float(new_z)
         except ValueError:
-            return f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', both have to be numerics."
+            error_alert = f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', all have to be numerics."
+            print(error_alert)
+            return error_alert
+    
 
-    # Method for plotting "sphere" (actually circle since in 2D, depth not visualized)
-    def plot(self, test_x = None, test_y = None):
-        fig, ax = plt.subplots()
-        ax.set_xticks(range(-5, 6)) 
-        ax.set_yticks(range(-5, 6)) 
-        ax.set_xlabel('X-axis')
-        ax.set_ylabel('Y-axis')
-        ax.axhline(0, linewidth=1)
-        ax.axvline(0, linewidth=1) 
-        ax.grid(True)
-        if test_x is not None and test_y is not None:
-            plt.plot(test_x, test_y, 'ro')
 
-        #Själva plotten
-        circle_for_plot = pltCircle((self._x, self._y), self._radius, fill=False, color='blue')
-        ax.add_patch(circle_for_plot)
-        plt.show()
 
+
+
+# 6. Main function for assessment statements from labb3 instructions
 
 def main():
     

@@ -52,6 +52,9 @@ def test_cube_area():
 def test_cube_is_inside():
     assert my_cube1.is_inside(0.5,0.5,0.5) == True   
 
+def test_translate_cube():
+    assert my_cube1.translate(0.5,0.5,"d") == f"Error, you entered '0.5','0.5' and' 'd', all have to be numerics."
+
 # Test of Sphere class
 my_sphere1 = Sphere(x=0,y=0, z=0, radius=1)
 my_sphere2 = Sphere(x=1,y=1, z=1, radius=1)
@@ -62,8 +65,5 @@ def test_sphere_area():
 def test_sphere_is_inside():
     assert my_sphere1.is_inside(0.5,0.5,0.5) == True  
 
-
-
-    # cirkel1.translate(5,5)
-    # print(cirkel1.is_inside(0.5, 0.5)) # False
-    # cirkel1.translate("TRE",5) # ge ValueError med lämplig kommentar
+def test_translate_sphere():
+    assert my_sphere1.translate("younis",0.5,0.5) == f"Error, you entered 'younis','0.5' and' '0.5', all have to be numerics."
