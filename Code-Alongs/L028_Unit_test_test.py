@@ -62,6 +62,6 @@ def test_greet_argument():
         # Viktigt att hålla sig till detta då - att kalla varje funktion som ska testas för test_något.
         # Rött F  betyder failed, grön punkt betyder gick igenom. För varje funktion med test fås ett F eller grön punkt.
         # Bara för att testerna går igenom betyder inte att koden funkar som den ska 
-# Vid refaktoring, är såna tester särskilt bra. Då kan man upptäcka om en funktionalitet försvann i samband med det.
-# Varje "enhet"/funktion testas för sig - FÅR INTE HA SIDE-effects om det ska gå att testa
+# Vid refaktoring (cleanande av kod utan att funktion påverkas), är såna tester särskilt bra. Då kan man upptäcka om en funktionalitet försvann i samband med det.
+# Varje "enhet"/funktion testas för sig - FÅR INTE HA SIDE-effects om det ska gå att testa ("lös kod")
 
