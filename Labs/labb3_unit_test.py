@@ -130,7 +130,7 @@ def test_translate_rectangle():
 
 
 
-# # Test of Cube class
+# Test of Cube class
 
 def test_cube__repr__():
     my_cube = Cube(0, 0, 0, 1, 1, 1)
