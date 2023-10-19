@@ -87,7 +87,7 @@ class Circle(Shapes2D):
 
         # The plot
         ax.scatter(x, y, color='green', marker='o')
-        circle_for_plot = plt.Circle((self.x, self.y), self.radius, fill=False, color='blue')
+        circle_for_plot = pltCircle((self.x, self.y), self.radius, fill=False, color='blue')
         ax.add_patch(circle_for_plot)
         plt.show()
 
