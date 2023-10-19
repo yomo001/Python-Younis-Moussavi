@@ -3,37 +3,28 @@ from matplotlib.patches import Circle as pltCircle, Rectangle as pltRectangle
 import math
 
 # In this module you will find
-    # 1. Class Shapes2D
-        # 2. Class Circle (Inheriting from Shapes2D)
-        # 3. Class Rectangle (Inheriting from Shapes2D)
-    # 4. Class Shapes3D
-        # 5. Class Cube (Inheriting from Shapes3D)
-        # 6. Class Sphere (Inheriting from Shapes3D)
+    # 1 Class GeometricShapes
+        # 2. Class Shapes2D
+            # 3. Class Circle (Inheriting from Shapes2D)
+            # 4. Class Rectangle (Inheriting from Shapes2D)
+        # 5. Class Shapes3D
+            # 6. Class Cube (Inheriting from Shapes3D)
+            # 7. Class Sphere (Inheriting from Shapes3D)
 
 
-# 1. Class Shapes2D
-
-class Shapes2D:          
+# 1. Class GeometricShapes
+class GeometricShapes:
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    
+            self.x = x
+            self.y = y
+        
     @property                                   # Area property
     def area(self):
         return "This is meant to be overridden"
-
-    def translate(self, move_x, move_y):         # Method for translating the shape
-            try:
-                self.x = self.x + float(move_x)
-                self.y = self.y + float(move_y)
-            except ValueError:
-                error_alert = f"Error, you entered '{move_x}' and '{move_y}', both have to be numerics."
-                print(error_alert)            # Because assessment question in labb3 required printing it out when entering it.
-                return error_alert
-          
+            
     def __eq__(self, other):                   # Operator overload of ==
         return self.area == other.area        
- 
+
     def __lt__(self, other):                   # Operator overload of <
         return self.area < other.area
 
@@ -46,7 +37,21 @@ class Shapes2D:
     def __ge__(self, other):                   # Operator overload of >=
         return self.area >= other.area
 
-# 2. Class Circle (Inheriting from Shapes2D)
+# 2. Class Shapes2D (Inheriting from GeometricShapes)
+
+class Shapes2D(GeometricShapes):          
+
+    def translate(self, move_x, move_y):         # Method for translating the shape
+            try:
+                self.x = self.x + float(move_x)
+                self.y = self.y + float(move_y)
+            except ValueError:
+                error_alert = f"Error, you entered '{move_x}' and '{move_y}', both have to be numerics."
+                print(error_alert)            # Because assessment question in labb3 required printing it out when entering it.
+                return error_alert
+          
+    
+# 3. Class Circle (Inheriting from Shapes2D)
 
 class Circle(Shapes2D):
     def __init__(self, x, y, radius):
@@ -92,7 +97,7 @@ class Circle(Shapes2D):
         plt.show()
 
     
-# 3. Class Rectangle (Inheriting from Shapes2D)
+# 4. Class Rectangle (Inheriting from Shapes2D)
 
 class Rectangle(Shapes2D):
     def __init__(self, x, y, width, height):
@@ -143,14 +148,13 @@ class Rectangle(Shapes2D):
 
 
 
-# 4. Class Shapes3D
+# 5. Class Shapes3D (Inheriting from GeometricShapes)
 
-class Shapes3D:          
+class Shapes3D(GeometricShapes):          
     def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
+        super().__init__(x,y)
         self.z = z
-    
+
     @property                                   # Area property
     def area(self):
         return "This is meant to be overridden"
@@ -164,25 +168,8 @@ class Shapes3D:
                 error_alert = f"Error: you entered '{move_x}', '{move_y}' and '{movez}', all have to be numerics."
                 print(error_alert)            # Because assessment question in labb3 required printing it out when entering it.
                 return error_alert
-          
-    def __eq__(self, other):                   # Operator overload of ==
-        return self.area == other.area        
- 
-    def __lt__(self, other):                   # Operator overload of <
-        return self.area < other.area
 
-    def __le__(self, other):                   # Operator overload of <=
-        return self.area <= other.area
-
-    def __gt__(self, other):                   # Operator overload of >
-        return self.area > other.area
-
-    def __ge__(self, other):                   # Operator overload of >=
-        return self.area >= other.area
-
-
-
-# 5. Class Cube (Inheriting from Shapes3D) 
+# 6. Class Cube (Inheriting from Shapes3D) 
 
 class Cube(Shapes3D):
     def __init__(self, x, y, z, width, height, depth):
@@ -190,7 +177,6 @@ class Cube(Shapes3D):
         self.width = width                     # Specifik for cube, added to __init__ inheritance from superclass
         self.height = height                   # Specifik for cube, added to __init__ inheritance from superclass
         self.depth = depth                     # Specifik for cube, added to __init__ inheritance from superclass
-
 
     @property                                  # Area property
     def area(self):
@@ -217,7 +203,7 @@ class Cube(Shapes3D):
 
 
 
-# 6. Class Sphere (Inheriting from Shapes3D)
+# 7. Class Sphere (Inheriting from Shapes3D)
 
 class Sphere(Shapes3D):
     def __init__(self, x, y, z, radius):
