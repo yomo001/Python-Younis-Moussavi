@@ -19,11 +19,11 @@ class GeometricShapes:
         self._y = y
 
     @property
-    def x(self):
-        return self._x
+    def x(self):                # OBS BEHÖVER EJ HA PROPERTY OCH SETTER OM MAN ÄNDÅ SKA ÄNDRA DIREKT. BARA OM MAN INTE SKULLE ÄNDRA ALLS:
+        return self._x           # OBS SE ÖVER SÅ ATT MAN SKA KUNNA SÄTTA DET TILL ANNAT I EFTERHAND
 
     @x.setter
-    def x(self, new_x):
+    def x(self, new_x):          # OBS SE ÖVER SÅ ATT MAN SKA KUNNA SÄTTA DET TILL ANNAT I EFTERHAND
         self._x = new_x
 
     @property
@@ -48,8 +48,8 @@ class GeometricShapes:
                 return error_alert
             
     def __eq__(self, other):                   # Operator overload of ==
-        return type(self) is type(other)
-
+        return type(self) is type(other)       # OBS - ÄNDRA HÄR, TILL AREA
+ 
     def __lt__(self, other):                   # Operator overload of <
         return self.area < other.area
 
@@ -70,7 +70,7 @@ class GeometricShapes:
 class Circle(GeometricShapes):
     def __init__(self, x, y, radius):
         super().__init__(x, y)
-        try:   
+        try:                                    # ONÖDIGT, TA BORT TRY METODEN
             self._radius = float(radius)        # Specifik for circle, added to __init__ inheritance from superclass
         except ValueError as e:
             print(f"{e}")
@@ -83,10 +83,8 @@ class Circle(GeometricShapes):
     def circumference(self):
         return 2 * math.pi * self._radius
 
-    def circumference(self):
-        return 2 * math.pi * self._radius
-
-    def __repr__(self):                         # __repr__ override
+    def __repr__(self):                         # __repr__ override 
+                                                # ÄNDRA SKRIV UT PYTHONKOD SOM GÖR INSTANSKOD FÖR LIKADAN CIRKEL
         return f"This is a circle with the coordinates {self._x}, {self._y} and radius {self._radius} units"
 
     def __str__(self):                          # __str__ override
@@ -95,12 +93,12 @@ class Circle(GeometricShapes):
     def is_unit_circle(self):                   # Method for assessing if circle is a unit circle
         return self._x == 0 and self._y == 0 and self._radius == 1
 
-    def is_inside(self, test_x, test_y):        # Method for assessing if a point is within the circle
-        self.plot(test_x, test_y)               # Plot to visualize the point in relation to the circle
-        distance = math.sqrt((test_x-self._x)**2+(test_y-self._y)**2)
+    def is_inside(self, x, y):        # Method for assessing if a point is within the circle
+        # OBS EJ BIEFFEKT TA BORT PLOTTEN self.plot(x, y)               # Plot to visualize the point in relation to the circle
+        distance = math.sqrt((x-self._x)**2+(y-self._y)**2)
         return distance <= self._radius
 
-    def plot(self, test_x = None, test_y = None):    # Method for plotting the circle
+    def plot(self, x = None, y = None):    # TA BORT X, Y ,      Method for plotting the circle
         # The figure and graphics
         fig, ax = plt.subplots()
         ax.set_xticks(range(-5, 6)) 
@@ -110,8 +108,8 @@ class Circle(GeometricShapes):
         ax.axhline(0, linewidth=1)
         ax.axvline(0, linewidth=1) 
         ax.grid(True)
-        if test_x is not None and test_y is not None:
-            plt.plot(test_x, test_y, 'ro')
+        if x is not None and y is not None:      # TA BORT X och Y
+            plt.plot(x, y, 'ro')
 
         # The plot
         circle_for_plot = pltCircle((self._x, self._y), self._radius, fill=False, color='blue')
@@ -149,10 +147,10 @@ class Rectangle(GeometricShapes):
     def is_square(self):                                    # Method to check if shape is a square
         return self._width == self._height
     
-    def is_inside(self, test_x, test_y):                    # Method for assessing if a point is within the rectangle
+    def is_inside(self, test_x, test_y):   #ÄNDRA TILL X OCH Y                 # Method for assessing if a point is within the rectangle
         self.plot(test_x, test_y)                           # Plot to visualize the point in relation to the rectangle
-        distance_x = test_x-self._x
-        distance_y = test_y-self._y
+        distance_x = abs(test_x-self._x) # OBS ÄNDRAT , så att det funkar för - värden, lägg till i testet, värden utanför och innanför kvadraten, positiva och negativa
+        distance_y = abs(test_y-self._y)
         return distance_x <= self._width/2 and distance_y <= self._height/2      # Distance from x/y min, max for assessment
         
     def plot(self, test_x = None, test_y = None):          # Method for plotting the rectangle
@@ -178,7 +176,10 @@ class Rectangle(GeometricShapes):
 
 
 
-# 4. Class Cube (Inheriting from Rectangle)
+# 4. Class Cube (Inheriting from Rectangle) # OBS ÄRV FRÅN GEOMETRIC SHAPES, OLOGISKT ANNARS.
+# SUPER CLASS SOM HETER SHAPE, SEDAN FRÅN DEN SHAPE 2 D och SHAPE 3 D. och sedan 3 D ÄRVER DET DOM SKA HA. LOGISKEN STÄMMER BÄTTRE DÅ
+# Plotten räcker för de två första. 
+# Is_inside plotta separat, via main
 
 class Cube(Rectangle):
     def __init__(self, x, y, z, width, height, depth):
@@ -195,9 +196,9 @@ class Cube(Rectangle):
     
     @property                               # Circumference property
     def circumference(self):
-        return 4* self._width               # If it is a cube, then width, height and depth are the same, so 4 x optional side
+        return 4* self._width              # HA MED VOLYM # ÄNDRA OMKRETS PÅ 3D BEHÖVS EJ, 3D SHAPES HAR INTE OMKRETS, BEROENDE PÅ HUR MAN MÄTER  # If it is a cube, then width, height and depth are the same, so 4 x optional side
 
-    @property                               # Property for z coordinate
+    @property                              # Property for z coordinate
     def z(self):
         return self._z
 
@@ -216,15 +217,15 @@ class Cube(Rectangle):
 
     def is_inside(self, test_x, test_y, test_z):         # Method for assessing if a point is within the cube. Polymorphism.                               
         self.plot(test_x, test_y)                        # Plotting the point to visualize its relation to the cube (obs 2D, depth not visualized)
-        distance_x = test_x-self._x                      # Assessing distance from x,y,z min, max 
+        distance_x = test_x-self._x    #ÄNDRA O VÄLJ ABSOLUTA VÄRDET                  # Assessing distance from x,y,z min, max 
         distance_y = test_y-self._y
         distance_z = test_z-self._z
         return distance_x <= self._width/2 and distance_y <= self._height/2 and distance_z <= self._depth/2
 
     def translate(self, new_x, new_y, new_z):           # Translate method. Polymorphism.
         try:
-            self.x = float(new_x)
-            self.y = float(new_y)
+            self.x = float(new_x)   ### ÄNDRA ; x första + x förflyttning
+            self.y = float(new_y)   ## ÄNDRA BEHÖVER EJ KONVERTERA TILL FLOATS, FÖRUTSÄTTER ATT DET ÄR DET VI SKICKAR IN
             self.z = float(new_z)
         except ValueError:
             error_alert = f"Error, you entered '{new_x}','{new_y}' and' '{new_z}', all have to be numerics."
@@ -271,7 +272,7 @@ class Sphere(Circle):
 
     def is_inside(self, test_x, test_y, test_z):    # Method for checking if point is within sphere
         self.plot(test_x, test_y)                   # Plot to visualize point in relation to square (obs, 2D, depth not visualized)
-        distance = math.sqrt((test_x-self._x)**2+(test_y-self._y)**2+(test_z-self._z)**2)   # https://stackoverflow.com/questions/26818772/python-checking-if-a-point-is-in-sphere-with-center-x-y-z
+        distance = math.sqrt((test_x-self._x)**2+(test_y-self._y)**2+(test_z-self._z)**2)   # excercise 0 och https://stackoverflow.com/questions/26818772/python-checking-if-a-point-is-in-sphere-with-center-x-y-z
         return distance <= self._radius              
         
     def translate(self, new_x, new_y, new_z):       # Polymorphism of translate method
@@ -290,7 +291,7 @@ class Sphere(Circle):
 
 
 # 6. Main function for assessment statements from labb3 instructions
-
+# Main ska ligga som en egen. 
 def main():
     
     # Controls from labb3 assignment instructions. All passed.
@@ -306,3 +307,4 @@ def main():
 
 if __name__ == "__main__":               # To avoid "loose code" from running when importing module
     main()
+
