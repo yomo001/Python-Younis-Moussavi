@@ -62,7 +62,7 @@ class Circle(Shapes2D):
         return 2 * math.pi * self.radius
 
     def __repr__(self):                         # __repr__ override                                       
-        return f"Circle({self.x},{self.r},{self.x})"
+        return f"Circle({self.x}, {self.y}, {self.radius})"
 
     def __str__(self):                          # __str__ override
         return f"This is a circle with the coordinates {self.x}, {self.y} and radius {self.radius} units"
@@ -244,22 +244,3 @@ class Sphere(Shapes3D):
     def is_inside(self, x, y, z):       # Method for checking if point is within sphere
         distance = math.sqrt((x-self.x)**2+(y-self.y)**2+(z-self.z)**2)    # excercise 0 and https://stackoverflow.com/questions/26818772/python-checking-if-a-point-is-in-sphere-with-center-x-y-z
         return distance <= self.radius              
-        
-    
-
-
-# Main ska ligga som en egen. 
-def main():
-    
-    # Controls from labb3 assignment instructions. All passed.
-    cirkel1 = Circle(x=0,y=0, radius=1) # enhetscirkel
-    cirkel2 = Circle(x=1,y=1, radius=1)
-    rektangel = Rectangle(x=0,y=0,width=1, height=1)
-    print(cirkel1==cirkel2) # True
-    print(cirkel2==rektangel) # False
-    print(cirkel1.is_inside(0.5, 0.5)) # True
-    print(cirkel1.is_inside(5, 5)) # False
-    cirkel1.translate("TRE",5) # ge ValueError med lämplig kommentar
-
-if __name__ == "__main__":               # To avoid "loose code" from running when importing module
-    main()

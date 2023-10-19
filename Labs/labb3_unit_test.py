@@ -4,6 +4,10 @@ import math
 
 # Test of Circle class
 
+def test_circle__repr__():
+    my_circle = Circle(0, 0, 1)
+    assert  my_circle.__repr__()== 'Circle(0, 0, 1)'
+
 def test_circle_area():
     my_circle = Circle(x=0,y=0, radius=1)
     assert  my_circle.area == math.pi    
@@ -36,12 +40,26 @@ def test_circle_is_not_inside_neg():
     my_circle = Circle(x=0,y=0, radius=1)
     assert my_circle.is_inside(-4,-4) == False
 
-def test_equality():                            
+def test_circle_equality():                            
     my_circle1 = Circle(x=0,y=0, radius=1)
     my_circle2 = Circle(x=0,y=0, radius=1)
     my_rectangle = Rectangle(x=0,y=0,width=2, height=2)
     assert my_circle1.__eq__(my_circle2) == True
     assert my_circle1.__eq__(my_rectangle) == False
+
+def test_circle_less_than():                            
+    my_circle1 = Circle(x=0,y=0, radius=1)
+    my_circle2 = Circle(x=0,y=0, radius=1)
+    my_rectangle = Rectangle(x=0,y=0,width=2, height=2)
+    assert my_circle1.__lt__(my_circle2) == False
+    assert my_circle1.__lt__(my_rectangle) == True
+
+def test_circle_greater_than():                            
+    my_circle1 = Circle(x=0,y=0, radius=1)
+    my_circle2 = Circle(x=0,y=0, radius=1)
+    my_rectangle = Rectangle(x=0,y=0,width=2, height=2)
+    assert my_circle1.__gt__(my_circle2) == False
+    assert my_circle1.__gt__(my_rectangle) == False
 
 def test_translate_circle():    
     my_circle = Circle(x=0,y=0, radius=1)
@@ -50,6 +68,10 @@ def test_translate_circle():
 
 
 # Test of Rectangle class
+
+def test_rectangle__repr__():
+    my_rectangle = Rectangle(0, 0, 1, 1)
+    assert  my_rectangle.__repr__()== 'Rectangle(0, 0, 1, 1)'
 
 def test_rectangle_area():
     my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
@@ -83,10 +105,24 @@ def test_rectangle_is_not_inside_neg():
     my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
     assert my_rectangle.is_inside(-1,-1) == False
 
-def test_equality():                            
+def test_rectangle_equality():                            
     my_rectangle1 = Rectangle(x=0,y=0,width=1, height=1)
     my_rectangle2 = Rectangle(x=0,y=0,width=1, height=1)
+    my_rectangle3 = Rectangle(x=0,y=0,width=2, height=1)
     assert my_rectangle1.__eq__(my_rectangle2) == True
+    assert my_rectangle3.__eq__(my_rectangle2) == False
+
+def test_rectangle_less_than():                            
+    my_rectangle1 = Rectangle(x=0,y=0,width=2, height=2)
+    my_rectangle2 = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle1.__lt__(my_rectangle2) == False
+    assert my_rectangle2.__lt__(my_rectangle1) == True
+
+def test_rectangle_greater_than():                            
+    my_rectangle1 = Rectangle(x=0,y=0,width=2, height=2)
+    my_rectangle2 = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle1.__gt__(my_rectangle2) == True
+    assert my_rectangle2.__gt__(my_rectangle1) == False
 
 def test_translate_rectangle():    
     my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
@@ -95,6 +131,10 @@ def test_translate_rectangle():
 
 
 # # Test of Cube class
+
+def test_cube__repr__():
+    my_cube = Cube(0, 0, 0, 1, 1, 1)
+    assert  my_cube.__repr__()== 'Cube(0, 0, 0, 1, 1, 1)'
 
 def test_cube_area():
     my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
@@ -128,10 +168,24 @@ def test_cube_is_not_inside_neg():
     my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
     assert my_cube.is_inside(-4,-4,-4) == False
 
-def test_equality():                            
+def test_cube_equality():                            
     my_cube1 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
     my_cube2 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    my_cube3 = Cube(x=0,y=0, z=0, width=3, height=1, depth=1)
     assert my_cube1.__eq__(my_cube2) == True
+    assert my_cube3.__eq__(my_cube2) == False
+
+def test_cube_less_than():                            
+    my_cube1 = Cube(x=0,y=0, z=0, width=1, height=2, depth=2)
+    my_cube2 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube1.__lt__(my_cube2) == False
+    assert my_cube2.__lt__(my_cube1) == True
+
+def test_cube_greater_than():                            
+    my_cube1 = Cube(x=0,y=0, z=0, width=1, height=2, depth=2)
+    my_cube2 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube1.__gt__(my_cube2) == True
+    assert my_cube2.__gt__(my_cube1) == False
 
 def test_translate_cube():    
     my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
@@ -139,6 +193,10 @@ def test_translate_cube():
 
 
 # Test of Sphere class
+
+def test_sphere__repr__():
+    my_sphere = Sphere(0, 0, 0, 1)
+    assert  my_sphere.__repr__()== 'Sphere(0, 0, 0, 1)'
 
 def test_sphere_area():
     my_sphere = Sphere(x=0,y=0, z=0, radius=1)
@@ -172,10 +230,24 @@ def test_sphere_is_not_inside_neg():
     my_sphere = Sphere(x=0,y=0, z=0, radius=1)
     assert my_sphere.is_inside(-4,-4,-4) == False
 
-def test_equality():                            
+def test_sphere_equality():                            
     my_sphere1 = Sphere(x=0,y=0, z=0, radius=1)
     my_sphere2 = Sphere(x=0,y=0, z=0, radius=1)
+    my_sphere3 = Sphere(x=0,y=0, z=0, radius=2)
     assert my_sphere1.__eq__(my_sphere2) == True
+    assert my_sphere3.__eq__(my_sphere2) == False
+
+def test_sphere_less_than():                            
+    my_sphere1 = Sphere(x=0,y=0, z=0, radius=2)
+    my_sphere2 = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere1.__lt__(my_sphere2) == False
+    assert my_sphere2.__lt__(my_sphere1) == True
+
+def test_sphere_greater_than():                            
+    my_sphere1 = Sphere(x=0,y=0, z=0, radius=2)
+    my_sphere2 = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere1.__gt__(my_sphere2) == True
+    assert my_sphere2.__gt__(my_sphere1) == False
 
 def test_translate_sphere():    
     my_sphere = Sphere(x=0,y=0, z=0, radius=1)
