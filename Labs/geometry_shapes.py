@@ -4,10 +4,10 @@ import math
 
 # In this module you will find
     # 1 Class GeometricShapes
-        # 2. Class Shapes2D
+        # 2. Class Shapes2D (Inheriting from GeometricShapes)
             # 3. Class Circle (Inheriting from Shapes2D)
             # 4. Class Rectangle (Inheriting from Shapes2D)
-        # 5. Class Shapes3D
+        # 5. Class Shapes3D (Inheriting from GeometricShapes)
             # 6. Class Cube (Inheriting from Shapes3D)
             # 7. Class Sphere (Inheriting from Shapes3D)
 
