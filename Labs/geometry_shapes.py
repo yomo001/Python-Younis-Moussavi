@@ -11,7 +11,6 @@ import math
         # 6. Class Sphere (Inheriting from Shapes3D)
 
 
-
 # 1. Class Shapes2D
 
 class Shapes2D:          
@@ -72,7 +71,7 @@ class Circle(Shapes2D):
         return self.x == 0 and self.y== 0 and self.radius == 1
 
     def is_inside(self, x, y):                  # Method for assessing if a point is within the circle
-        distance = math.sqrt((abs(x-self.x))**2+(y-self.y)**2)
+        distance = math.sqrt((x-self.x)**2+(y-self.y)**2)
         return distance <= self.radius
 
     def plot(self, x = None, y = None):         # x and y if we want to compare coordinates in relation to shape
@@ -243,7 +242,7 @@ class Sphere(Shapes3D):
         return self.x == 0 and self.y== 0 and self.z == 0 and self.radius == 1
 
     def is_inside(self, x, y, z):       # Method for checking if point is within sphere
-        distance = math.sqrt((abs(x-self.x))**2+(y-self.y)**2+(z-self.z)**2)    # excercise 0 and https://stackoverflow.com/questions/26818772/python-checking-if-a-point-is-in-sphere-with-center-x-y-z
+        distance = math.sqrt((x-self.x)**2+(y-self.y)**2+(z-self.z)**2)    # excercise 0 and https://stackoverflow.com/questions/26818772/python-checking-if-a-point-is-in-sphere-with-center-x-y-z
         return distance <= self.radius              
         
     

@@ -1,69 +1,182 @@
 from geometry_shapes import Circle, Rectangle, Cube, Sphere
 import math
-#matplotlib.use('Agg')  # https://stackoverflow.com/questions/4930524/how-can-i-set-the-matplotlib-backend    
-#Because of problem assessing functions where the plots are plotted, i want to assess the boolean not the plot 
-# so this does not affect the functionality of the test
-
-
 
 
 # Test of Circle class
-my_circle1 = Circle(x=0,y=0, radius=1)              #  GÖR DETTA I VARJE ENSKILD FUNKTION ISTÄLLET. 
-my_circle2 = Circle(x=1,y=1, radius=1)
 
 def test_circle_area():
-    assert  my_circle1.area == math.pi                    
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert  my_circle.area == math.pi    
+
+def test_circle_circumference():
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert  my_circle.circumference == 2*math.pi * my_circle.radius             
 
 def test_circle_is_unit():
-    assert my_circle1.is_unit_circle() == True         # TRUE OCH FALSE  (INTE I SAMMA FÖR DEF IS_NOT_UNIT)         
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert my_circle.is_unit_circle() == True                 
 
-def test_circle_is_inside():                           # IS INSIDE OCH NOT INSIDE   , MED POSITIVT OCH NEGATIVT-  FYRA VARIANTER
-    assert my_circle1.is_inside(0.5,0.5) == True   
+def test_circle_is_not_unit():
+    my_circle = Circle(x=0,y=0, radius=2)
+    assert my_circle.is_unit_circle() == False       
 
-def test_equality_override():                           # HA DETTA MED.  BRA ATT HA HÄR VID REFACTORING,    
-    assert my_circle1.__eq__(my_circle2) == True        # assessing my_circle1 == my_circle2
-       
+def test_circle_is_inside_pos():                         
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert my_circle.is_inside(0.5,0.5) == True
+
+def test_circle_is_not_inside_pos():                         
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert my_circle.is_inside(4,4) == False
+
+def test_circle_is_inside_neg():                         
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert my_circle.is_inside(-0.5, -0.5) == True
+
+def test_circle_is_not_inside_neg():                         
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert my_circle.is_inside(-4,-4) == False
+
+def test_equality():                            
+    my_circle1 = Circle(x=0,y=0, radius=1)
+    my_circle2 = Circle(x=0,y=0, radius=1)
+    my_rectangle = Rectangle(x=0,y=0,width=2, height=2)
+    assert my_circle1.__eq__(my_circle2) == True
+    assert my_circle1.__eq__(my_rectangle) == False
+
 def test_translate_circle():    
-    assert my_circle1.translate("TRE",5) == f"Error, you entered 'TRE' and '5', both have to be numerics."
+    my_circle = Circle(x=0,y=0, radius=1)
+    assert my_circle.translate("TRE",5) == f"Error, you entered 'TRE' and '5', both have to be numerics."
+
+
 
 # Test of Rectangle class
-my_rectangle1 = Rectangle(x=0,y=0,width=1, height=1)
-my_rectangle2 = Rectangle(x=1,y=1,width=1, height=2)
 
 def test_rectangle_area():
-    assert  my_rectangle1.area == 1                  
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert  my_rectangle.area == my_rectangle.width * my_rectangle.height   
 
-def test_rectangle_is_inside():
-    assert my_rectangle1.is_inside(0.5, 0.5) == True     
+def test_rectangle_circumference():
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert  my_rectangle.circumference == 2*my_rectangle.width + 2*my_rectangle.height             
 
-def test_equality_override2():
-    assert my_circle2.__eq__(my_rectangle2) == False         # assessing my_circle2 == my_rectangle2
+def test_rectangle_is_square():
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle.is_square() == True               
 
-def test_translate_rectangle():
-    assert my_rectangle1.translate(3,"FEM") == f"Error, you entered '3' and 'FEM', both have to be numerics."
+def test_rectangle_is_not_square():
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=2)
+    assert my_rectangle.is_square() == False      
 
-# Test of Cube class
-my_cube1 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
-my_cube2 = Cube(x=1,y=1, z=1, width=2, height=3, depth=2)
+def test_rectangle_is_inside_pos():                         
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle.is_inside(0.3,0.3) == True
+
+def test_rectangle_is_not_inside_pos():                         
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle.is_inside(1,1) == False
+
+def test_rectangle_is_inside_neg():                         
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle.is_inside(-0.3,-0.3) == True
+
+def test_rectangle_is_not_inside_neg():                         
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle.is_inside(-1,-1) == False
+
+def test_equality():                            
+    my_rectangle1 = Rectangle(x=0,y=0,width=1, height=1)
+    my_rectangle2 = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle1.__eq__(my_rectangle2) == True
+
+def test_translate_rectangle():    
+    my_rectangle = Rectangle(x=0,y=0,width=1, height=1)
+    assert my_rectangle.translate(3,"FEM") == f"Error, you entered '3' and 'FEM', both have to be numerics."
+
+
+
+# # Test of Cube class
 
 def test_cube_area():
-    assert  my_cube1.area == 6                  
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert  my_cube.area ==  2*my_cube.width*my_cube.height + 2*my_cube.depth*my_cube.height+2*my_cube.depth*my_cube.width
 
-def test_cube_is_inside():
-    assert my_cube1.is_inside(0.5,0.5,0.5) == True   
+def test_cube_volume():
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert  my_cube.volume == my_cube.width * my_cube.height * my_cube.depth         
 
-def test_translate_cube():
-    assert my_cube1.translate(0.5,0.5,"d") == f"Error, you entered '0.5','0.5' and' 'd', all have to be numerics."
+def test_cube_is_cube():
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube.is_cube() == True          
+
+def test_cube_is_not_cube():
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=2)
+    assert my_cube.is_cube() == False      
+
+def test_cube_is_inside_pos():                         
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube.is_inside(0.3,0.3,0.3) == True
+
+def test_cube_is_not_inside_pos():                         
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube.is_inside(4,4,4) == False
+
+def test_cube_is_inside_neg():                         
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube.is_inside(-0.3,-0.3,-0.3) == True
+
+def test_cube_is_not_inside_neg():                         
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube.is_inside(-4,-4,-4) == False
+
+def test_equality():                            
+    my_cube1 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    my_cube2 = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube1.__eq__(my_cube2) == True
+
+def test_translate_cube():    
+    my_cube = Cube(x=0,y=0, z=0, width=1, height=1, depth=1)
+    assert my_cube.translate(3,"FEM",3) == f"Error: you entered '3', 'FEM' and '3', all have to be numerics."
+
 
 # Test of Sphere class
-my_sphere1 = Sphere(x=0,y=0, z=0, radius=1)
-my_sphere2 = Sphere(x=1,y=1, z=1, radius=1)
 
 def test_sphere_area():
-    assert  my_sphere1.area == math.pi*4               
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert  my_sphere.area == 4*math.pi*my_sphere.radius**2
 
-def test_sphere_is_inside():
-    assert my_sphere1.is_inside(0.5,0.5,0.5) == True  
+def test_sphere_volume():
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert  my_sphere.volume == (4/3) * math.pi * my_sphere.radius**3         
 
-def test_translate_sphere():
-    assert my_sphere1.translate("younis",0.5,0.5) == f"Error, you entered 'younis','0.5' and' '0.5', all have to be numerics."
+def test_sphere_is_unit_sphere():
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere.is_unit_sphere() == True            
+
+def test_sphere_is_not_unit_sphere():
+    my_sphere = Sphere(x=0,y=0, z=0, radius=2)
+    assert my_sphere.is_unit_sphere() == False       
+
+def test_sphere_is_inside_pos():                         
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere.is_inside(0.3,0.3,0.3) == True
+
+def test_sphere_is_not_inside_pos():                         
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere.is_inside(4,4,4) == False
+
+def test_sphere_is_inside_neg():                         
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere.is_inside(-0.3,-0.3,-0.3) == True
+
+def test_sphere_is_not_inside_neg():                         
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere.is_inside(-4,-4,-4) == False
+
+def test_equality():                            
+    my_sphere1 = Sphere(x=0,y=0, z=0, radius=1)
+    my_sphere2 = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere1.__eq__(my_sphere2) == True
+
+def test_translate_sphere():    
+    my_sphere = Sphere(x=0,y=0, z=0, radius=1)
+    assert my_sphere.translate("TRE",5,3) == f"Error: you entered 'TRE', '5' and '3', all have to be numerics."
