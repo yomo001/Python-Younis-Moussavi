@@ -136,7 +136,7 @@ class Rectangle(Shapes2D):
         ax.set_ylabel('Y-axis')
         ax.axhline(0, linewidth=1)
         ax.axvline(0, linewidth=1) 
-        ax.grid(True)
+        ax.grid(True)   
 
         # The plot
         ax.scatter(x, y, color='green', marker='o')
